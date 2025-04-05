@@ -1,0 +1,45 @@
+1. // createad a privated repo i-am-a-git-noob
+2. git init 
+	automatically a new ./git folder got created
+	./git folder contains ==> Head file , config file ,description file , hooks folder , 		info folder , object folder , ref folder 
+	on first commit git log gets created
+3. git remote add origin git@github.com:Om-Mankar/i-am-a-git-noob.git
+4. git config --local --list
+5. git config --local user.name "Om Mankar"
+6. git config --local user.email omankar@qodeleaf.com
+7. echo "first line in file" > test1.txt
+8. git branch -m Main
+   git add text1.txt
+   git commit -m "first commit"
+   git push --set-upstream origin Main
+9. echo "second line in file" >> test1.txt
+10. git add test1.txt
+11. git status  
+	Changes to commit :
+		modified : test1.txt
+	Untracked files:
+		.DS_Store
+12. echo "third line in file" >> test1.txt
+13. git restore --staged test1.txt
+14. echo "hello" >> README.md
+	git add README.md
+	git commit -m "My First Commit" ==> No commit occurred
+15. git push origin Main 
+	checklist of commits :
+				1. first commit 
+				2. My First Commit
+16. git commit --amend -m "My Second Commit"
+17. git push -f origin Main	
+18. git diff HEAD HEAD~1
+19. git revert HEAD
+20. echo "Fourth line in file" >> test1.txt 
+    git add test1.txt 
+    git commit -m "fourth line commit"
+21. echo "Fifth line in file" >> test1.txt
+    git add test1.txt 
+    git commit --amend 
+    Exit vim with :q
+22. git push origin Main
+23. echo "append content to the file" >> test1.txt 
+24. git pull
+25. Git clone git@github.com:Om-Mankar/i-am-a-git-noob.git 
