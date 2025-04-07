@@ -1,4 +1,5 @@
 You need to create a Document to submit your answer/commands
+
 Q1. Write a shell script which will execute the following set of tasks:
     a. Create a folder named ‘sample’  in your ‘home’ directory
     b. Inside ‘sample’ folder, create a file called ‘sample.txt’
@@ -23,8 +24,13 @@ Q1. Write a shell script which will execute the following set of tasks:
     list prog
     p. Note: Should have the same output as of command at step o.
 Q2. What is the difference between the source and sh commands?
+
 Q3. Create two files “a.txt” and “b.txt”. Write a command to get the difference between the contents in two files.
+
 Q4.What is the difference between ls and lsof?
+
 Q5. Create directories ./hello/world (World dir is inside hello dir) using mkdir command where neither hello or world exists. It should be a single command without the use of &&. 
+
 Q6. How can you permanently set an environment variable using a bash terminal?
+
 Q7. You have some process running on a port in your system. How can you view and then kill the process from the terminal?
