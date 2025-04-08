@@ -1,0 +1,35 @@
+.outer-box{
+    height: 70vh;
+    width: 70vw;
+    border: solid green 2px;
+    padding: 10vh 10vw;
+}
+
+.bird{
+    height: 5vh;
+    width: 5vw;
+    position:absolute;
+    top:70vh;
+}
+
+.controls{
+    height: 10vw;
+    width: 10vw;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.down{
+    top: 80vh;
+    left:40vw
+}
+
+.obstacle{
+    display: flex;
+}
+
+.hurdle{
+    width: 20vw;
+    height: 10vh;
+    border : solid 
+}
