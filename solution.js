@@ -100,5 +100,3 @@ function secondLargest(array) {
     console.log(output2);
     return output2;
   }
-  
-  
