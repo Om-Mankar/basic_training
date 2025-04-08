@@ -1,42 +1,59 @@
 1. 
 	a. mkdir ~/sample
+
 	b. cd ~/sample
 	   touch sample.txt 
+	
 	c. //appending at the end of the file
 	   echo "Hi! This is just a sample text file created using a shell script." | cat >> sample.txt
 	   cat sample.txt
+	
 	d. cat sample.txt
+	
 	e. grep -c "t" sample.txt
+	
 	f. chmod u+rwx sample.txt
+	
 	g. echo "Hi! This is just a sample text file created using a shell script." | cat >> sample.txt
 	   cat sample.txt
+	
 	h. Chmod g+r sample.txt
 	   chmod g-wx sample.txt
 	   chmod a-rwx sample.txt
+	
 	I. chmod u-rwx sample.txt
+	
 	j. cat sample.txt >sample2.txt
+	
 	k. 
+	
 	l. head -50 sample.txt
+	
 	m. tail -50 sample.txt
+	
 	n. touch  prog1.txt, prog2.txt, program.txt, code.txt, info.txt
+	
 	o. ls prog*
+	
 	P. ls prog*
+
 2. The source command in Linux is used to read and execute commands from a specified file in the current shell environment
    Sh executes commands read from the terminal, a file, or a command-line string
+
 3. touch a.txt
    touch b.txt
    diff -c a.txt b.txt 
+
 4. ls lists all file present in current directory and lsof list all the open files.
+
 5. mkdir -p ./hello/world
+
 6. vim ~/.bashrc
 	press i
 	export MY_VARIABLE="my_value"
 	esc
 	:wq
+
 7. View using netstat identify the port
    netstat -an | grep ':portno'
    Kill -9 PID 
-
-
-	
-	
