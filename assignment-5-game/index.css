@@ -1,0 +1,71 @@
+.outer-box{
+    height: 80vh;
+    width: 90vw;
+    border: solid rgb(234, 238, 234) 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.title{
+    width: 90vw;
+    height: 5vh;
+    text-align: center;
+}
+.game{
+    height: 70vh;
+    width: 90vw;
+}
+.bird{
+    height: 7vh;
+    width: 7vw;
+    position:absolute;
+    top: 40vh
+}
+.controls{
+    height: 5vh;
+    width: 90vw;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.down{
+    height: 5vh;
+    width: 45vw;
+    text-align: center;
+    background-color: antiquewhite;
+    border: solid rgb(232, 197, 151) 3px;
+    
+}
+.down:hover{
+    background-color: rgb(180, 167, 150);
+}
+.up{
+    height: 5vh;
+    width: 45vw;
+    text-align: center;
+    background-color: antiquewhite;
+    border: solid rgb(232, 197, 151) 3px;
+}
+.up:hover{
+    background-color: rgb(180, 167, 150);
+}
+.obstacle{
+    display: flex;
+    justify-content:space-between;
+    height:70vh;
+    width: 90vw
+}
+
+ .dis{
+    width: 14vw;
+    height: 0vh;
+    border : solid;
+    border-radius: 5%;
+    background-color: brown;
+ }
+ .hurdle{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+ }
