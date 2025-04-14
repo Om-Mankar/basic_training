@@ -1,0 +1,101 @@
+Q1. 
+    /[^\.][\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~\w]*[^\.]*[\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~\w]*[^\.]*/
+
+Q2. 
+   Assuming: should not start with .
+   Assuming: shoulds end with .com
+   Assuming: can contains numbers after @ as well
+   Assuming: never saw capital character in email Id
+      /[a-z \.]+[@][0-9 a-z \.]*(\.com)/
+
+ 
+Q3
+  Assuming: typically constains 15 to 16 characters
+  Assuming: first 6 characters ==> bank identification number
+  Assuming: second 9 characters
+  Assuming: 16th character is optional
+  Solution: /(group of six digits)[0-9]{9}[0-9]?/
+
+Q4
+   Assuming: considering indian number standards  and using disjunction operator
+   Solution: /(\+91)?[0-9]{10}|[a-z \.]+[@][0-9 a-z \.]*(\.com)/
+
+Q5 
+   Assuming: input in milisecond
+    function setTIMEOUT(newTime){
+        const currTime=new Date();
+        const desiredTime=new Date(currTime.getTime()+newTime);
+        while(true){
+            let cur = new Date();
+            if(cur.getTime()==desiredTime.getTime()){break;}
+        }
+        console.log(`Printed after ${newTime} .`);
+
+    }
+
+
+Q6
+    class arr{
+        // let a be an array
+        pushMethod(element){
+            this.a.append(element)
+        }
+        pullMethod(){
+            this.a=this.a.slice(0,this.a.length-1);
+        }
+        shiftMethod(){
+            this.a=this.a.slice(1,this.a.length)
+        }
+        unshiftMethod(element){
+            let newArr=[element];
+            newArr.append.apply(newArr,this.a);
+            this.a=newArr
+        }
+        lenghtMethod(){
+            let len=0;
+            for(const num in this.a){
+                len++;
+            }
+            return len;
+        }
+        
+        spliceMethod(start,count,...element){
+            const ans=[];
+            for(let i=0;i<start && i<this.a.length;i++){
+                ans.append(element[i]);
+            }
+            ans.append().apply(ans,element);
+            for (let index = start+count; index < this.a.length; index++) {
+                ans.append(this.a[i]);
+            }
+            return ans;
+        }
+        indexOfMethod(element){
+            let index=-1;
+            let l=0;
+            for(const ele in this.a){
+                if(ele===element){
+                    index=l;
+                    break;
+                }
+                l++;
+            }
+            return index;
+        }
+    }
+
+Q7. ????
+function question7(){
+    function validateString(input) {
+        setTimeout(function () {
+        // input is said to be valid if it is a lowercase string
+        if (typeof input === 'string' && input === input.toLowerCase()) {
+            return true;
+        }
+  
+        return null;
+        }, 500);
+    }
+  input = ['first', 'Second', 'thiRd', 4, false, 'true'];
+  console.log(validateString().apply(null,input));
+  }
