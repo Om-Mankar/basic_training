@@ -120,11 +120,13 @@ contract MarketPlace {
             address currentAssetAddress = listOfprotocolFeeAssetAddress[i];
             if(currentAssetAddress == address(0)){
                 continue;
+            } else {
+                bool status = IERC20(currentAssetAddress).transfer(owner, protocolFeeInfo[currentAssetAddress]);
+                if(status == false){
+                    revert FailedToCollectProtocolFee();
+                }
             }
-            bool sent = IERC20(currentAssetAddress).transfer(owner, protocolFeeInfo[currentAssetAddress]);
-            if(sent == false){
-                revert FailedToCollectProtocolFee();
-            }
+            
             delete protocolFeeInfo[currentAssetAddress];
         }
         delete listOfprotocolFeeAssetAddress;
@@ -248,7 +250,7 @@ contract MarketPlace {
                     amountOfERC20ToTransfer = ((priceOfAsset *(10**IERC20(currentAsset.paymentContractAddress).decimals()))*9945)/10000;
                     IERC20(currentAsset.paymentContractAddress).transferFrom(owner, currentAsset.owner, amountOfERC20ToTransfer);
                 } else {
-                    address  _to = msg.sender;
+                    address  _to = currentAsset.owner;
                     bool sent;
                     bytes memory data;
                     amountOfERC20ToTransfer = ((priceOfAsset *(10**18))*9945)/10000;
@@ -314,11 +316,11 @@ contract MarketPlace {
             amountOfERC20ToTransfer = ((totalPriceOfAsset *(10**IERC20(paymentContractAddress).decimals()))*9945)/10000;
             IERC20(paymentContractAddress).transferFrom(msg.sender, currentAssetOwner, amountOfERC20ToTransfer);
         } else {
-            address  _to = msg.sender;
+            
             bool sent;
             bytes memory data;
             amountOfERC20ToTransfer = ((totalPriceOfAsset *(10**18))*9945)/10000;
-            (sent, data) = _to.call{value: amountOfERC20ToTransfer}("");
+            (sent, data) = currentAssetOwner.call{value: amountOfERC20ToTransfer}("");
             require(sent, "Failed to send Ether");
             uint256 protocolFee = ((totalPriceOfAsset * PRIMARY_PROTOCOL_FEE)/10000);
             setProtocolFeeList(paymentContractAddress, protocolFee);
