@@ -47,7 +47,7 @@ contract MarketPlace {
     address private owner;
     bytes32[] private listOfAssetId;
     address[] private listOfprotocolFeeAssetAddress;
-    mapping(address => uint256) public protocolFeeInfo;
+    mapping(address => uint256) private protocolFeeInfo;
     mapping(bytes32 tokenId => AssetOnSale) private assetInfo; //assetInfo
 
     event Registered721Token(
