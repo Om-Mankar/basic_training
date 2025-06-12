@@ -46,8 +46,8 @@ contract MarketPlace {
     
     address private owner;
     bytes32[] private listOfAssetId;
-    address[]public listOfprotocolFeeAssetAddress;
-    mapping(address => uint256) public protocolFeeInfo;
+    address[] private listOfprotocolFeeAssetAddress;
+    mapping(address => uint256) private protocolFeeInfo;
     mapping(bytes32 tokenId => AssetOnSale) private assetInfo; //assetInfo
 
     event Registered721Token(
@@ -132,7 +132,7 @@ contract MarketPlace {
 
     /* @dev function to set the protocol fees 
     */
-    function setProtocolFeeList(address assetAddress, uint256 amount) internal {
+    function setProtocolFeeList(address assetAddress, uint256 amount) private {
         if(protocolFeeInfo[assetAddress] == 0){
             protocolFeeInfo[assetAddress] = amount;
             listOfprotocolFeeAssetAddress.push(assetAddress);
@@ -149,7 +149,7 @@ contract MarketPlace {
     */
     function registerERC721AssetForSale(
         uint256 tokenId, 
-        uint256 priceOfAssets,
+        uint256 priceOfAsset,
         address assetContractAddress,
         address paymentContractAddress
     ) addressValidation(assetContractAddress) public {
@@ -160,14 +160,14 @@ contract MarketPlace {
             if(msg.sender != IERC721(assetContractAddress).ownerOf(tokenId)){
                 revert Unauthorised();
             }
-            if(priceOfAssets == 0){
+            if(priceOfAsset == 0){
                 revert InvalidPriceOfAssset();
             }
             
             AssetOnSale memory asset = AssetOnSale({
                 assetContractAddress: assetContractAddress, 
                 assetId: tokenId, 
-                priceOfAsset: priceOfAssets, 
+                priceOfAsset: priceOfAsset, 
                 numberOfAsset: 1,
                 paymentContractAddress: paymentContractAddress,
                 owner: msg.sender
@@ -183,8 +183,7 @@ contract MarketPlace {
             assetInfo[uniqueTokenId] = asset;
 
             //emit event 
-            emit Registered721Token(msg.sender, tokenId, priceOfAssets);
-        
+            emit Registered721Token(msg.sender, tokenId, priceOfAsset); 
     }
 
     /* @dev Function to Register Asset on the Marketplace Contract.*/
