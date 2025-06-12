@@ -47,7 +47,7 @@ contract MarketPlace {
     address private owner;
     bytes32[] private listOfAssetId;
     address[] private listOfprotocolFeeAssetAddress;
-    mapping(address => uint256) private protocolFeeInfo;
+    mapping(address => uint256) public protocolFeeInfo;
     mapping(bytes32 tokenId => AssetOnSale) private assetInfo; //assetInfo
 
     event Registered721Token(
@@ -119,7 +119,10 @@ contract MarketPlace {
         for(uint256 i; i < listOfprotocolFeeAssetAddress.length; i++){
             address currentAssetAddress = listOfprotocolFeeAssetAddress[i];
             if(currentAssetAddress == address(0)){
-                continue;
+                bool sent;
+                bytes memory data;
+                (sent, data) = owner.call{value: protocolFeeInfo[currentAssetAddress]}("");
+                require(sent, "MarketPlace: Failed to send Ether");
             } else {
                 bool status = IERC20(currentAssetAddress).transfer(owner, protocolFeeInfo[currentAssetAddress]);
                 if(status == false){
@@ -240,24 +243,26 @@ contract MarketPlace {
     ) addressValidation(assetContractAddress) userInputValidation(assetId, priceOfAsset) public payable {
         // Generate unique asset Id.
         bytes32 uniqueAssetId = genrateUniqueTokenId(assetContractAddress, assetId);
-        uint256 amountOfERC20ToTransfer;
+
         for( uint i; i < listOfAssetId.length; i++){
             if(listOfAssetId[i] == uniqueAssetId) {
                 AssetOnSale memory currentAsset = assetInfo[uniqueAssetId];
                 if(currentAsset.paymentContractAddress != address(0)) {
-                    uint256 protocolFee = ((priceOfAsset * PRIMARY_PROTOCOL_FEE)/10000);
+
+                    uint256 protocolFee = ((priceOfAsset * (10**IERC20(currentAsset.paymentContractAddress).decimals()) * PRIMARY_PROTOCOL_FEE)/10000);
                     setProtocolFeeList(currentAsset.paymentContractAddress,protocolFee);
-                    amountOfERC20ToTransfer = ((priceOfAsset *(10**IERC20(currentAsset.paymentContractAddress).decimals()))*9945)/10000;
+
+                    uint256 amountOfERC20ToTransfer = ((priceOfAsset *(10**IERC20(currentAsset.paymentContractAddress).decimals()))*9945)/10000;
                     IERC20(currentAsset.paymentContractAddress).transferFrom(owner, currentAsset.owner, amountOfERC20ToTransfer);
                 } else {
                     address  _to = currentAsset.owner;
                     bool sent;
                     bytes memory data;
-                    amountOfERC20ToTransfer = ((priceOfAsset *(10**18))*9945)/10000;
-                    (sent, data) = _to.call{value: amountOfERC20ToTransfer}("");
+                    uint256 amountToTransfer = ((priceOfAsset *(10**18))*9945)/10000;
+                    (sent, data) = _to.call{value: amountToTransfer}("");
                     require(sent, "MarketPlace: Failed to send Ether");
 
-                    uint256 protocolFee = ((priceOfAsset * PRIMARY_PROTOCOL_FEE)/10000);
+                    uint256 protocolFee = ((priceOfAsset *(10**18))*PRIMARY_PROTOCOL_FEE)/10000;
                     setProtocolFeeList(currentAsset.paymentContractAddress,protocolFee);
                 }
                 IERC721(currentAsset.assetContractAddress).transferFrom(currentAsset.owner, msg.sender, currentAsset.assetId);
